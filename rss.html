@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<title>Search NYTimes Articles</title>
+
+		<style media="screen,handheld" type="text/css">
+body { font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', 'VGA'; background-color: #eee; }
+.thisPage { font-weight: bold; } a { color: #406940; }
+blockquote { border-left: 1px solid black; border-radius: 0.5vw; padding-left: 0.5vw; font-size: 75% }
+.storylink { font-variant: small-caps; font-size: 120%; }
+.small, .smalldate, #headerSubTitle { font-size: 75%; opacity: 0.6; } 
+h1 a { text-decoration: none; color: inherit; }
+ul { list-style: none outside; padding-left: 1vw; }                    
+#side-bar { margin : 8pt; float: right;  } #side-bar * { font-variant: small-caps; }
+#button {
+	display: inline-block;
+	background-color: #406940;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	border-radius: 4px;
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	transition: background-color .3s, 
+		opacity .5s, visibility .5s;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 1000;
+}
+#button::after {
+	content: "\f077";
+	font-family: FontAwesome;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 2em;
+	line-height: 50px;
+	color: #fff;
+}
+#button:hover {
+	cursor: pointer;
+	background-color: #333;
+}
+#button:active {
+	background-color: #555;
+}
+#button.show {
+	opacity: 1;
+	visibility: visible;
+}
+@media (prefers-color-scheme: dark) { body { background-color: #222; color: #dcdccc; } a { color: #7f9f7f; } }
+@media only screen and (min-width: 800px) { #header, #main-copy, #footer { padding: 0 10vw; } }
+		</style>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+		<meta name=viewport content="width=device-width, initial-scale=1"> 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
+	<body>
+
+		<a id="button"></a>
+		<div id="header">
+			<div class="midHeader">
+				<h1 class="headerTitle"><a href="/rss.html">Homepage RSS Feed... <span id="headerSubTitle">NYTimes</span></a></h1>
+			</div>
+		</div>
+
+
+		<div id="side-bar">
+			<div>
+				<p class="sideBarTitle">Navigation:</p>
+				<ul>
+					<li><a href="/index.html/">&rsaquo; home/</a></li>
+					<li><a href="/about.html/">&rsaquo; about/</a></li>
+					<li><a href="/rss.html/">&rsaquo; rss/</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="main-copy">
+			<h1><a href="#">Daily RSS Feed</a></h1>
+
+			<p>Feed is divided into the topic, link, and a brief description about what's inside the article.
+			</p>
+			<output></output>
+
+
+
+			<script>
+				const feedUrl =  "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+
+				fetch(feedUrl).then((res) => {
+					res.text().then((xmlTxt) => {
+						var domParser = new DOMParser()
+						let doc = domParser.parseFromString(xmlTxt, 'text/xml')
+						doc.querySelectorAll('item').forEach((item) => {
+							let h2 = document.createElement('h2')
+							let h3 = document.createElement('h3')
+							let h4 = document.createElement('h4')
+							h2.textContent = item.querySelector('title').textContent
+							h3.textContent = item.querySelector('link').textContent
+							h4.textContent = item.querySelector('description').textContent
+							document.querySelector('output').appendChild(h2)
+							document.querySelector('output').appendChild(h3)
+							document.querySelector('output').appendChild(h4)
+						})
+					})
+				})
+
+				var btn = $('#button');
+
+				$(window).scroll(function() {
+					if ($(window).scrollTop() > 300) {
+						btn.addClass('show');
+					} else {
+						btn.removeClass('show');
+					}
+				});
+
+				btn.on('click', function(e) {
+					e.preventDefault();
+					$('html, body').animate({scrollTop:0}, '300');
+				});
+
+			</script>
+	</body></html>
+

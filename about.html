@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<title>About - Search NYTimes Articles</title>
+
+		<style media="screen,handheld" type="text/css">
+body { font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', 'VGA'; background-color: #eee; }
+.thisPage { font-weight: bold; } a { color: #406940; }
+blockquote { border-left: 1px solid black; border-radius: 0.5vw; padding-left: 0.5vw; font-size: 75% }
+.storylink { font-variant: small-caps; font-size: 120%; }
+.small, .smalldate, #headerSubTitle { font-size: 75%; opacity: 0.6; } 
+h1 a { text-decoration: none; color: inherit; }
+ul { list-style: none outside; padding-left: 1vw; }                    
+#side-bar { margin : 8pt; float: right;  } #side-bar * { font-variant: small-caps; }
+#button {
+	display: inline-block;
+	background-color: #406940;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	border-radius: 4px;
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	transition: background-color .3s, 
+		opacity .5s, visibility .5s;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 1000;
+}
+#button::after {
+	content: "\f077";
+	font-family: FontAwesome;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 2em;
+	line-height: 50px;
+	color: #fff;
+}
+#button:hover {
+	cursor: pointer;
+	background-color: #333;
+}
+#button:active {
+	background-color: #555;
+}
+#button.show {
+	opacity: 1;
+	visibility: visible;
+}
+@media (prefers-color-scheme: dark) { body { background-color: #222; color: #dcdccc; } a { color: #7f9f7f; } }
+@media only screen and (min-width: 800px) { #header, #main-copy{ padding: 0 10vw; } }
+		</style>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+		<meta name=viewport content="width=device-width, initial-scale=1"> 
+	</head>
+	<body>
+
+		<div id="header">
+			<div class="midHeader">
+				<h1 class="headerTitle"><a href="/about.html">About - Search NYTimes Articles <span id="headerSubTitle"> and it's APIs </span></a></h1>
+			</div>
+		</div>
+
+
+		<div id="side-bar">
+			<div>
+				<p class="sideBarTitle">Navigation:</p>
+				<ul>
+					<li><a href="/index.html/">&rsaquo; home/</a></li>
+					<li><a href="/about.html/">&rsaquo; about/</a></li>
+					<li><a href="/rss.html/">&rsaquo; rss/</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="main-copy">
+			<h1><a href="https://developer.nytimes.com/apis">NYTimes APIs</a></h1>
+
+			<p>
+			The NYTimes Article Search API is used to look up articles by keyword. This can be used with different parameters listed in the API documentation, which can be found here: <a href="https://developer.nytimes.com/apis">NYTimes APIs</a>. This Article Search API allows the GET method to communicate and returns the JSON object as an output. This API's primary purpose is to build a basic demo application to search for articles based on specific keywords. This can help in tracking the recent and old news based on a certain timeline.
+			</p>
+
+
+		</div>
+
+	</body></html>
+
